@@ -1,0 +1,60 @@
+.post {
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.post__header {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.post__info {
+    margin-left: 10px;
+}
+.post__info > p {
+    font-size: 12px;
+    color: gray;
+}
+.post__body {
+    overflow-wrap: anywhere;
+    margin-bottom: 10px;
+}
+.post__info > h2 {
+    font-size: 15px;
+}
+.post__buttons {
+    color: black;
+    display: flex;
+    justify-content: space-evenly;
+    border-top: 1px solid lightgray;
+    margin-top: 10px;
+    padding-top: 10px;
+    cursor: pointer;
+}
+
+/* Like button active (blue) */
+.post__button.like.active {
+    color: #0a66c2;  /* LinkedIn blue */
+    font-weight: bold;
+}
+
+/* Comment box hidden by default */
+.comment-box {
+    display: none;
+    margin-top: 10px;
+}
+
+.comment-box textarea {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    padding: 8px;
+    resize: none;
+}
+
+/* Comment box visible when active */
+.comment-box.active {
+    display: block;
+}

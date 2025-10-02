@@ -1,0 +1,99 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;  /* ✅ form ko thoda upar karne ke liye */
+  height: 100vh;
+  background-color: #f3f2ef;
+  padding-top: 40px;            /* ✅ page ke top se thoda space */
+}
+
+.login > img {
+  object-fit: contain;
+  height: 50px;
+  margin-bottom: 20px;          /* ✅ logo ke neeche kam gap */
+}
+
+.login__tagline {
+  font-size: 32px;
+  font-weight: 400;
+  margin: 5px 0 20px 0;         /* ✅ tagline ko upar laya */
+  color: #333;
+  text-align: center;
+}
+
+.login > form {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+  width: 350px;
+  text-align: center;
+  margin-bottom: 15px;          /* ✅ neeche "Not a member" ke liye jagah */
+}
+
+.login > form > input {
+  height: 40px;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.login > form > button {
+  height: 45px;
+  border-radius: 25px;
+  border: none;
+  background-color: #0a66c2;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.login > form > button:hover {
+  background-color: #004182;
+}
+
+.login > p {
+  margin-top: 5px;             /* ✅ upar laya */
+  font-size: 14px;
+  text-align: center;          /* ✅ center me rakha */
+}
+
+.login__register {
+  color: #0a66c2;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.login__register:hover {
+  text-decoration: underline;
+
+}
+.login__input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.login__input label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #333;
+  text-align: left;
+}
+
+.login__input input {
+  padding: 10px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  font-size: 14px;
+}
