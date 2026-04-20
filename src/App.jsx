@@ -1,51 +1,55 @@
-import React, { useEffect } from "react"
-import "./App.css"
-import Header from "./Header"
-import Sidebar from "./Sidebar"
-import Feed from "./Feed"
-import { useDispatch, useSelector } from "react-redux"
-import { login, logout, selectUser } from "./features/userSlice"
-import Login from "./Login"
-import { auth } from "./firebase"
-import Widgets from "./Widgets"
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
+import Feed from "./Feed";
+import { useDispatch, useSelector } from "react-redux";
+import { login, logout, selectUser } from "./features/userSlice";
+import Login from "./Login";
+import Widgets from "./Widgets";
+import Profile from "./Profile";
+
 
 
 function App() {
-  const user =useSelector(selectUser)
-  const dispatch =useDispatch ();
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState('home');
 
-   useEffect(()=>{
-    auth.onAuthStateChanged(userAuth =>{
-      if(userAuth){
-             // user is logged in 
-             dispatch(login({
-                email : userAuth.email,
-                uid: userAuth.uid,
-                displayName : userAuth.displayName,
+  useEffect(() => {
+    const token     = localStorage.getItem("token");
+    const savedUser = localStorage.getItem("user");
+    if (token && savedUser) {
+      dispatch(login(JSON.parse(savedUser)));
+    } else {
+      dispatch(logout());
+    }
+  }, []);
 
-             })
-            )
-      }else{
-             // user is logged out
-             dispatch(logout())
-      }
+  // Ek jagah Header props banao
+  const headerProps = {
+    onViewProfile: () => setCurrentPage('profile'),
+    onGoHome:      () => setCurrentPage('home'),
+   
+  };
 
-    })
- },[])
-
-return (
+ return (
   <div className="app">
     {!user ? (
-      // ✅ user logout hone par sirf Login page dikhega
       <Login />
+
+    ) : currentPage === 'profile' ? (
+      <>
+        <Header {...headerProps} />
+        <Profile onBack={() => setCurrentPage('home')} />
+      </>
     ) : (
       <>
-        {/* ✅ user login hone par Header aur baaki components dikhenge */}
-        <Header />
+        <Header {...headerProps} />
         <div className="app__body">
           <Sidebar />
           <Feed />
-          <Widgets/>
+          <Widgets />
         </div>
       </>
     )}
@@ -53,4 +57,4 @@ return (
 );
 }
 
-export default App
+export default App;

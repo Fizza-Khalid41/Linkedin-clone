@@ -1,18 +1,21 @@
-import React, { useState } from "react"
-import "./HeaderOption.css"
-import { Avatar } from "@mui/material"
-import { useSelector } from "react-redux"
-import { selectUser } from "./features/userSlice"
+import React, { useState } from "react";
+import "./HeaderOption.css";
+import { Avatar } from "@mui/material";
+import { useSelector } from "react-redux";
+import { selectUser } from "./features/userSlice";
 
-function HeaderOption({ avatar, Icon, title, onLogout }) {
-  const user = useSelector(selectUser)
-  const [open, setOpen] = useState(false)
+function HeaderOption({ avatar, Icon, title, onLogout, onViewProfile, onClick }) {
+  const user = useSelector(selectUser);
+  const [open, setOpen] = useState(false);
 
   return (
     <div className="headerOption">
       <div
         className="headerOption__main"
-        onClick={() => setOpen(!open)} // ✅ avatar click -> dropdown toggle
+        onClick={() => {
+          if (onClick) onClick();
+          else setOpen(!open);
+        }}
       >
         {Icon && <Icon className="headerOption__icon" />}
         {avatar && (
@@ -23,15 +26,16 @@ function HeaderOption({ avatar, Icon, title, onLogout }) {
         <h3 className="headerOption__title">{title}</h3>
       </div>
 
-      {/* ✅ dropdown menu */}
-      {open && (
+      {open && avatar && (
         <div className="headerOption__menu">
-          <p>View Profile</p>
+          <p onClick={() => { onViewProfile(); setOpen(false); }}>
+            View Profile
+          </p>
           <p onClick={onLogout}>Sign Out</p>
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default HeaderOption
+export default HeaderOption;

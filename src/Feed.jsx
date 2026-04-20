@@ -1,4 +1,3 @@
-// Feed.jsx
 import React, { useEffect, useState } from "react";
 import "./Feed.css";
 import { Avatar } from "@mui/material";
@@ -7,54 +6,52 @@ import ImageIcon from "@mui/icons-material/Image";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import CalendarViewDayIcon from "@mui/icons-material/CalendarViewDay";
 import Post from "./Post";
-import { db } from "./firebase";
-import {
-  collection,
-  addDoc,
-  onSnapshot,
-  serverTimestamp,
-  orderBy,
-  query,
-} from "firebase/firestore";
 import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice";
 import FlipMove from "react-flip-move";
+import axios from "axios";
 
 function Feed() {
   const user = useSelector(selectUser);
   const [input, setInput] = useState("");
   const [posts, setPosts] = useState([]);
 
-  // Realtime listener for posts
-  useEffect(() => {
-    const q = query(collection(db, "posts"), orderBy("timestamp", "desc"));
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      setPosts(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          data: doc.data(),
-        }))
-      );
-    });
+  // Token lo localStorage se
+  const token = localStorage.getItem("token");
 
-    return () => unsubscribe();
+  // Posts fetch karo Django se
+  useEffect(() => {
+    axios.get("http://127.0.0.1:8000/api/posts/", {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then(res => setPosts(res.data))
+    .catch(err => console.log(err));
   }, []);
 
-  // Add a new post
+  // Naya post Django mein save karo
   const sendPost = async (e) => {
     e.preventDefault();
 
-    if (!input.trim()) return; // empty post mat allow karo
+    if (!input.trim()) return;
 
-    await addDoc(collection(db, "posts"), {
-      name: user.displayName,
-      description: user.email,
-      message: input,
-      photoUrl: user.photoUrl || "",
-      timestamp: serverTimestamp(),
-    });
+    try {
+      const res = await axios.post("http://127.0.0.1:8000/api/posts/create/", {
+        content: input,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
 
-    setInput(""); // input clear kar do
+      // Naya post list mein add karo
+      setPosts([res.data, ...posts]);
+      setInput("");
+
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -86,17 +83,18 @@ function Feed() {
         </div>
       </div>
 
-      {/* Render posts */}
+      {/* Posts dikhao */}
       <FlipMove>
-      {posts.map(({ id, data: { name, description, message, photoUrl } }) => (
-        <Post
-          key={id}
-          name={name}
-          description={description}
-          message={message}
-          photoUrl={photoUrl}
-        />
-      ))}
+        {posts.map((post) => (
+  <Post
+    key={post.id}
+    id={post.id}
+    name={post.author}
+    description={post.email}
+    message={post.content}
+    photoUrl=""
+  />
+))}
       </FlipMove>
     </div>
   );

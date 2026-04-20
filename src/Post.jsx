@@ -6,34 +6,56 @@ import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
+import axios from "axios";
 
-const Post = forwardRef(({ name, description, message, photoUrl }, ref) => {
-  // state for like and comment
+const Post = forwardRef(({ id, name = "", description = "", message = "", photoUrl = "" }, ref) => {
   const [liked, setLiked] = useState(false);
+  const [likesCount, setLikesCount] = useState(0);
   const [showCommentBox, setShowCommentBox] = useState(false);
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
 
-  // handlers
-  const handleLike = () => {
-    setLiked(!liked);
+  const token = localStorage.getItem("token");
+
+  
+  const handleLike = async () => {
+    try {
+      const res = await axios.post(
+        `http://127.0.0.1:8000/api/posts/${id}/like/`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setLiked(!liked);
+      setLikesCount(res.data.likes);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleCommentClick = () => {
     setShowCommentBox(!showCommentBox);
   };
 
-  const handleCommentPost = () => {
-    if (comment.trim() !== "") {
-      setComments([comment, ...comments]);
+  
+  const handleCommentPost = async () => {
+    if (comment.trim() === "") return;
+    try {
+      const res = await axios.post(
+        `http://127.0.0.1:8000/api/posts/${id}/comment/`,
+        { content: comment },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setComments([res.data.content, ...comments]);
       setComment("");
+    } catch (error) {
+      console.log(error);
     }
   };
 
   return (
     <div ref={ref} className="post">
       <div className="post__header">
-        <Avatar src={photoUrl}>{name[0]}</Avatar>
+        <Avatar src={photoUrl}>{name?.[0]}</Avatar>
         <div className="post__info">
           <h2>{name}</h2>
           <p>{description}</p>
@@ -45,27 +67,22 @@ const Post = forwardRef(({ name, description, message, photoUrl }, ref) => {
       </div>
 
       <div className="post__buttons">
-        {/* Like Button */}
         <InputOption
           Icon={ThumbUpAltOutlinedIcon}
-          title="Like"
+          title={`Like ${likesCount > 0 ? likesCount : ""}`}
           color={liked ? "blue" : "gray"}
           onClick={handleLike}
         />
-
-        {/* Comment Button */}
         <InputOption
           Icon={CommentOutlinedIcon}
           title="Comment"
           color="gray"
           onClick={handleCommentClick}
         />
-
         <InputOption Icon={ShareOutlinedIcon} title="Share" color="gray" />
         <InputOption Icon={SendOutlinedIcon} title="Send" color="gray" />
       </div>
 
-      {/* Comment box */}
       {showCommentBox && (
         <div className="commentBox">
           <input
@@ -78,7 +95,6 @@ const Post = forwardRef(({ name, description, message, photoUrl }, ref) => {
         </div>
       )}
 
-      {/* Show comments */}
       {comments.length > 0 && (
         <div className="commentsList">
           {comments.map((c, i) => (

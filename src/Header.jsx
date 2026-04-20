@@ -9,14 +9,14 @@ import ChatIcon from "@mui/icons-material/Chat";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useDispatch } from "react-redux";
 import { logout } from "./features/userSlice";
-import { auth } from "./firebase";
 
-function Header() {
+function Header({ onViewProfile, onGoHome, onNetwork, onJobs, onMessaging , onNotification }) {
   const dispatch = useDispatch();
 
   const logoutOfApp = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
     dispatch(logout());
-    auth.signOut();
   };
 
   return (
@@ -25,8 +25,9 @@ function Header() {
         <img
           src="https://cdn-icons-png.flaticon.com/512/174/174857.png"
           alt=""
+          onClick={onGoHome}
+          style={{ cursor: "pointer" }}
         />
-
         <div className="header__search">
           <SearchIcon />
           <input type="text" />
@@ -34,14 +35,17 @@ function Header() {
       </div>
 
       <div className="header__right">
-        <HeaderOption Icon={HomeIcon} title="Home" />
-        <HeaderOption Icon={SupervisorAccountIcon} title="My Network" />
-        <HeaderOption Icon={BusinessCenterIcon} title="Jobs" />
-        <HeaderOption Icon={ChatIcon} title="Messaging" />
-        <HeaderOption Icon={NotificationsIcon} title="Notifications" />
-
-        {/* ✅ Avatar dropdown menu */}
-        <HeaderOption avatar={true} title="Me" onLogout={logoutOfApp} />
+        <HeaderOption Icon={HomeIcon} title="Home" onClick={onGoHome} />
+        <HeaderOption Icon={SupervisorAccountIcon} title="My Network" onClick={onNetwork} />
+        <HeaderOption Icon={BusinessCenterIcon} title="Jobs"  onClick={onJobs}/>
+        <HeaderOption Icon={ChatIcon} title="Messaging" onClick={onMessaging} />
+        <HeaderOption Icon={NotificationsIcon} title="Notifications" onClick={onNotification} />
+        <HeaderOption
+          avatar={true}
+          title="Me"
+          onLogout={logoutOfApp}
+          onViewProfile={onViewProfile}
+        />
       </div>
     </div>
   );

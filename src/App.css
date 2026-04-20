@@ -1,11 +1,16 @@
 body {
-  background-color: #f3f2ef; 
-}
-.app__body{
-    display: flex;
-   
-    max-width: 1600px;
-    margin-left: 20px;
-    margin-right: 20px;
+  background-color: #f3f2ef;
 }
 
+.app__body {
+  display: flex;
+  background-color: #f3f2ef;
+  max-width: 1600px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.app {
+  background-color: #f3f2ef;
+  min-height: 100vh;
+}
