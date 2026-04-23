@@ -54,8 +54,7 @@ function Profile({ onBack }) {
 
   useEffect(() => {
     
-    axios
-      .get("http://127.0.0.1:8000/api/profile/", {
+    axios.get("http://127.0.0.1:8000/api/profile/", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -85,8 +84,8 @@ function Profile({ onBack }) {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        const myPosts = res.data.filter(
-          (post) => post.email === user?.email
+        const myPosts = res.data.filter((post) => 
+          post.email === user?.email
         );
         setUserPosts(myPosts);
       })

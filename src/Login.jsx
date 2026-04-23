@@ -10,14 +10,11 @@ function Login() {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
 
-  // ✅ Login Function
+  
   const loginToApp = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://127.0.0.1:8000/api/login/", {
-        email,
-        password,
-      });
+      const res = await axios.post("http://127.0.0.1:8000/api/login/", {email,password, });
 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify({
@@ -33,26 +30,19 @@ function Login() {
       }));
 
     } catch (error) {
-      alert("Email ya Password galat hai!");
+      alert("Incorrect email or password!");
     }
   };
 
-  // ✅ Register Function
+  
   const register = async () => {
     if (!name) {
       return alert("Please enter a full name");
     }
     try {
-      await axios.post("http://127.0.0.1:8000/api/register/", {
-        username: name,
-        email,
-        password,
-      });
+      await axios.post("http://127.0.0.1:8000/api/register/", {username: name, email, password});
 
-      const res = await axios.post("http://127.0.0.1:8000/api/login/", {
-        email,
-        password,
-      });
+      const res = await axios.post("http://127.0.0.1:8000/api/login/", {email,password,});
 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify({
@@ -68,7 +58,7 @@ function Login() {
       }));
 
     } catch (error) {
-      alert("Account banana mein masla hua!");
+      alert("ERROR ! account is not created");
     }
   };
 

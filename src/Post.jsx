@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from "react";
+import React, { useState, forwardRef , useEffect} from "react";
 import "./Post.css";
 import { Avatar } from "@mui/material";
 import InputOption from "./InputOption";
@@ -16,6 +16,16 @@ const Post = forwardRef(({ id, name = "", description = "", message = "", photoU
   const [comments, setComments] = useState([]);
 
   const token = localStorage.getItem("token");
+
+  useEffect(() => {
+  axios.get(`http://127.0.0.1:8000/api/posts/${id}/comments/`, {
+    headers: { Authorization: `Bearer ${token}` }
+  })
+  .then((res) => setComments(res.data.map(c => c.content)))
+  .catch(console.error);
+}, []);
+
+
 
   
   const handleLike = async () => {
@@ -37,20 +47,28 @@ const Post = forwardRef(({ id, name = "", description = "", message = "", photoU
   };
 
   
-  const handleCommentPost = async () => {
-    if (comment.trim() === "") return;
-    try {
-      const res = await axios.post(
-        `http://127.0.0.1:8000/api/posts/${id}/comment/`,
-        { content: comment },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      setComments([res.data.content, ...comments]);
-      setComment("");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
+const handleCommentPost = async () => {
+  if (comment.trim() === "") return;
+  try {
+    await axios.post(
+      `http://127.0.0.1:8000/api/posts/${id}/comment/`,
+      { content: comment },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    setComment("");
+
+
+    const res = await axios.get(
+      `http://127.0.0.1:8000/api/posts/${id}/comments/`,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    setComments(res.data.map(c => c.content));
+
+  } catch (error) {
+    console.log(error);
+  }
+};
 
   return (
     <div ref={ref} className="post">
