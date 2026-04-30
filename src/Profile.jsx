@@ -383,7 +383,7 @@ function Profile({ onBack }) {
             </div>
             {editSkills && (
               <div className="profile__skillInput">
-                <input className="profile__input" value={skillInput} onChange={(e) => setSkillInput(e.target.value)} placeholder="Naya skill likho" />
+                <input className="profile__input" value={skillInput} onChange={(e) => setSkillInput(e.target.value)} placeholder="Add new Skill" />
                 <button className="profile__addBtn" onClick={addSkill}>+ Add</button>
               </div>
             )}
