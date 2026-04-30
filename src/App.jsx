@@ -8,6 +8,7 @@ import { login, logout, selectUser } from "./features/userSlice";
 import Login from "./Login";
 import Widgets from "./Widgets";
 import Profile from "./Profile";
+import Network from "./Network"
 
 
 
@@ -30,6 +31,7 @@ function App() {
   const headerProps = {
     onViewProfile: () => setCurrentPage('profile'),
     onGoHome:      () => setCurrentPage('home'),
+   onNetwork:      () => setCurrentPage('network'),
    
   };
 
@@ -43,7 +45,12 @@ function App() {
         <Header {...headerProps} />
         <Profile onBack={() => setCurrentPage('home')} />
       </>
-    ) : (
+    ) : currentPage === 'network' ? (
+      <>
+      <Header {...headerProps} />
+        <Network />
+      </>
+    ):(
       <>
         <Header {...headerProps} />
         <div className="app__body">
