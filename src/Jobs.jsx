@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { Avatar } from "@mui/material";
 import  {selectUser } from "./features/userSlice"
 
-function Job () {
+function Jobs () {
 
    const user = useSelector(selectUser)
    const token = localStorage.getItem("token")
@@ -19,7 +19,7 @@ function Job () {
     })
 
     .then(
-        res => setJob(res.data)
+        res => setJobs(res.data)
     )
     .catch(
         err => console.log(err)

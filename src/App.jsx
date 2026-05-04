@@ -52,7 +52,7 @@ function App() {
       <Header {...headerProps} />
         <Network />
       </>
-      ) : currentPage === 'job' ? (
+      ) : currentPage === 'jobs' ? (
       <>
       <Header {...headerProps} />
         <Jobs />
