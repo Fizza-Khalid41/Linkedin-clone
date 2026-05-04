@@ -9,6 +9,7 @@ import Login from "./Login";
 import Widgets from "./Widgets";
 import Profile from "./Profile";
 import Network from "./Network"
+import Jobs from "./Jobs"
 
 
 
@@ -27,11 +28,12 @@ function App() {
     }
   }, []);
 
-  // Ek jagah Header props banao
+  
   const headerProps = {
     onViewProfile: () => setCurrentPage('profile'),
     onGoHome:      () => setCurrentPage('home'),
-   onNetwork:      () => setCurrentPage('network'),
+    onNetwork:      () => setCurrentPage('network'),
+    onJobs: () => setCurrentPage('jobs')
    
   };
 
@@ -49,6 +51,11 @@ function App() {
       <>
       <Header {...headerProps} />
         <Network />
+      </>
+      ) : currentPage === 'job' ? (
+      <>
+      <Header {...headerProps} />
+        <Jobs />
       </>
     ):(
       <>
