@@ -1,0 +1,141 @@
+.jobs{
+    padding: 15px;
+    max-width: 1000px;
+    margin: 20px auto ;
+    gap: 20px ;
+    display: flex;
+}
+
+.jobs_left{
+    width: 250px;
+    flex-shrink: 0;
+}
+
+.jobs_profileCard{
+    background : white;
+    border-radius:10px;
+    overflow: hidden;
+    box-shadow:0 0 10px rgba(0,0,0,0.1) ;
+    margin-bottom: 15px ;
+    text-align: center ;
+    padding-bottom: 15px ;
+}
+
+.jobs_cover{
+  height: 60px;
+  background: linear-gradient(to right, #0077b5, #00a0dc);
+}
+
+.jobs_avatar{
+    width: 60px !important;
+    height: 60px !important;
+    margin-top: -30px !important;
+    border: 3px solid white !important;
+    background-color: #0077b5 !important;
+    font-size: 24px !important;
+}
+
+.jobs_profileCard h3{
+    font-size: 16px ;
+    margin: 8px 0 3px ;
+
+}
+
+.jobs_profileCard p{
+    font-size: 13px;
+    color: gray;
+}
+
+.jobs_leftCard{
+    background: white;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.jobs_leftCard p{
+    border-bottom:  1px solid #f0f0f0 ;
+    padding:10px 0;
+    cursor:pointer ;
+    font-size: 14px;
+}
+
+.jobs__leftCard p:hover {
+  color: #0077b5;
+}
+
+.jobs_right{
+  flex: 1;
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.jobs_right h2{
+    font-size: 18px;
+    margin-bottom:5px ;
+}
+
+.jobs_subtitle{
+   color: gray;
+   font-size: 13px;
+   margin-bottom: 20px  ;
+   padding-bottom: 15px ;
+   border-bottom: 1px solid #e0e0e0 ;
+}
+
+.jobs_card{
+    display: flex;
+    align-items:center ;
+    padding:15px 0 ;
+    gap:15px ;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.jobs__companyAvatar {
+  background-color: #0077b5 !important;
+  width: 50px !important;
+  height: 50px !important;
+  flex-shrink: 0;
+}
+
+.jobs_cardInfo{
+    flex: 1;
+}
+
+.jobs_title{
+   
+    color:#0077b5  ;
+    font-size: 15px;
+    cursor: pointer;
+    margin:0 0 3px ;
+}
+
+.jobs__title:hover {
+  text-decoration: underline;
+}
+
+.jobs__cardInfo p {
+  font-size: 13px;
+  color: gray;
+  margin: 2px 0;
+}
+
+.jobs__time {
+  font-size: 12px !important;
+  color: #aaa !important;
+}
+
+.jobs__dismiss {
+  background: none;
+  border: none;
+  color: gray;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px;
+}
+
+.jobs__dismiss:hover {
+  color: black;
+}

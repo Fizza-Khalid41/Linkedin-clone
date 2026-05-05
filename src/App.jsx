@@ -8,6 +8,8 @@ import { login, logout, selectUser } from "./features/userSlice";
 import Login from "./Login";
 import Widgets from "./Widgets";
 import Profile from "./Profile";
+import Network from "./Network"
+import Jobs from "./Jobs"
 
 
 
@@ -26,10 +28,12 @@ function App() {
     }
   }, []);
 
-  // Ek jagah Header props banao
+  
   const headerProps = {
     onViewProfile: () => setCurrentPage('profile'),
     onGoHome:      () => setCurrentPage('home'),
+    onNetwork:      () => setCurrentPage('network'),
+    onJobs: () => setCurrentPage('jobs')
    
   };
 
@@ -43,7 +47,17 @@ function App() {
         <Header {...headerProps} />
         <Profile onBack={() => setCurrentPage('home')} />
       </>
-    ) : (
+    ) : currentPage === 'network' ? (
+      <>
+      <Header {...headerProps} />
+        <Network />
+      </>
+      ) : currentPage === 'jobs' ? (
+      <>
+      <Header {...headerProps} />
+        <Jobs />
+      </>
+    ):(
       <>
         <Header {...headerProps} />
         <div className="app__body">
