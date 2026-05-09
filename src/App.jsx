@@ -10,6 +10,7 @@ import Widgets from "./Widgets";
 import Profile from "./Profile";
 import Network from "./Network"
 import Jobs from "./Jobs"
+import  Message  from "./Message";
 
 
 
@@ -33,7 +34,8 @@ function App() {
     onViewProfile: () => setCurrentPage('profile'),
     onGoHome:      () => setCurrentPage('home'),
     onNetwork:      () => setCurrentPage('network'),
-    onJobs: () => setCurrentPage('jobs')
+    onJobs: () => setCurrentPage('jobs'),
+    onMessaging:() => setCurrentPage('message')
    
   };
 
@@ -56,6 +58,11 @@ function App() {
       <>
       <Header {...headerProps} />
         <Jobs />
+      </>
+       ) : currentPage === 'message' ? (
+      <>
+      <Header {...headerProps} />
+        <Message/>
       </>
     ):(
       <>
