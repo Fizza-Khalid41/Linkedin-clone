@@ -3,7 +3,7 @@ import axios from "axios";
 import "./Message.css"
 
 function Messaging(){
-
+    const MAX_SUGGESTIONS = 4;
     const[conversations, setConversation ] = useState([])
     const[selected, setSelected] = useState(null)
 
@@ -48,10 +48,49 @@ function Messaging(){
                                </div>
                         </li>
                     )) }
-                    {conversations.length}
+                    {conversations.length === 0 && (
+                        <li className="empty">No conversations yet</li>
+                    )}
 
                 </ul>
 
+            </section>
+
+            <section className="chat">
+                {selected ? (
+                    <>
+                       <h3>{selected.name}</h3>
+                       <p className="muted">{selected.last_message}</p>
+                       <div className="composer">
+                        <input placeholder="Write a message..."/>
+                        <button>Send</button>
+                       </div>
+
+                    </>
+                ):(
+                   
+                   <>
+                     <h3>New message</h3>
+                     <input className="recipient" placeholder="Type a name or multiple names"/>
+                     <p className="muted">Suggested</p>
+                     <ul className="suggestions">
+                        {conversations
+                           .slice(0, MAX_SUGGESTIONS)
+                           .map((c)=>{
+                            const initial = c.name?.[0]?.toUpperCase() ?? "?";
+                            const fullName = c.name ?? "Unknown";
+                            return (
+                              <li key={c.id}>
+                              <div className="avatar small">{initial}</div>
+                              <span>{fullName}</span>
+                              </li>
+                            );
+                           })
+                        }
+
+                     </ul>
+                    </>
+                )}
             </section>
 
         </div>
