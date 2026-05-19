@@ -1,9 +1,44 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect, useRef} from "react";
 import axios from "axios";
 import "./Message.css"
 
+const MAX_SUGGESTIONS = 4;
+
+function composer({value, onChange, onKeyDown, onSend, canSend}){
+       return (
+          <div className="composer-wrapper">
+             <textarea className="composer-input"
+               placeholder="Write a message..."
+               rows={3}
+               value={value}
+               onChange={onChange}
+               onKeyDown={onKeyDown}
+      />
+
+      <div className="composer-toolbar">
+        <div className="composer-icons">
+          <button className="toolbar-btn" title="Image">🖼️</button>
+          <button className="toolbar-btn" title="Attach">📎</button>
+          <button className="toolbar-btn" title="GIF">GIF</button>
+          <button className="toolbar-btn" title="Emoji">🙂</button>
+          <button className="toolbar-btn" title="More">•••</button>
+          
+        </div>
+        <button
+          className={`send-btn ${canSend ? "active" : ""}`}
+          onClick={onSend}
+          disabled={!canSend}
+        >
+          Send
+        </button>
+
+      </div>
+      </div>
+);
+}
+
 function Messaging(){
-    const MAX_SUGGESTIONS = 4;
+    
     const[conversations, setConversations ] = useState([])
     const[selected, setSelected] = useState(null)
 
