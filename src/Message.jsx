@@ -4,7 +4,7 @@ import "./Message.css"
 
 function Messaging(){
     const MAX_SUGGESTIONS = 4;
-    const[conversations, setConversation ] = useState([])
+    const[conversations, setConversations ] = useState([])
     const[selected, setSelected] = useState(null)
 
     useEffect ( ()=>{
