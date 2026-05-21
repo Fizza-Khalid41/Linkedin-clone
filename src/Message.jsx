@@ -87,9 +87,9 @@ function Messaging() {
     const sentText = newMessage;
     setNewMessage("");
 
-    // === Existing conversation ===
+    
     if (selected) {
-        setMessages((prev) => [...prev, { sender: "me", content: sentText }]);
+        setMessages((prev) => [...prev, { sender: "me", content: sentText, is_mine: true }]);
         setConversations((prev) =>
             prev.map((c) =>
                 c.id === selected.id ? { ...c, last_message: sentText } : c
@@ -105,7 +105,7 @@ function Messaging() {
         return;
     }
 
-    // === Nai conversation (compose view) === ← YAHAN CHANGE HUA
+    
     const recipientName = recipient.trim();
     if (!recipientName) return;
 
@@ -124,7 +124,7 @@ function Messaging() {
             setSelected(newConv);
             setShowCompose(false);
             setRecipient("");
-            setMessages([{ sender: "me", content: sentText }]);
+           setMessages([{ sender: "me", content: sentText, is_mine: true }]);
 
             return axios.post("http://127.0.0.1:8000/api/send-message/", {
                 conversation_id: res.data.id,
@@ -277,11 +277,11 @@ function Messaging() {
                             {messages.map((m, i) => (
                                 <div
                                     key={i}
-                                    className={`message-bubble ${m.sender === "me" ? "sent" : "received"}`}
+                                   className={`message-bubble ${m.is_mine ? "sent" : "received"}`}
                                 >
-                                    {m.sender !== "me" && (
-                                        <span className="bubble-sender">{m.sender}</span>
-                                    )}
+                                   {!m.is_mine && (
+                                    <span className="bubble-sender">{m.sender}</span>
+)}
                                     <p>{m.content}</p>
                                 </div>
                             ))}
