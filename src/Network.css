@@ -1,0 +1,266 @@
+
+.network {
+  display: flex;
+  max-width: 1000px;
+  margin: 20px auto;
+  gap: 20px;
+  padding: 0 15px;
+}
+
+
+.network_left {
+  width: 250px;
+  flex-shrink: 0;
+}
+
+.network_leftCard {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.network_leftCard h3 {
+  font-size: 16px;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.network_leftItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 14px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+  align-items: center;
+}
+
+.network_leftItem:hover {
+  color: #0077b5;
+}
+
+.network_count {
+  color: #0077b5;
+  font-weight: bold;
+}
+
+
+.network_right {
+  flex: 1;
+}
+
+.network_card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.network_card h3 {
+  font-size: 16px;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+
+.network_userRow {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.network_avatar {
+  background-color: #0077b5 !important;
+  width: 50px !important;
+  height: 50px !important;
+  flex-shrink: 0;
+}
+
+.network_userInfo {
+  flex: 1;
+}
+
+.network_userInfo h4 {
+  font-size: 15px;
+  margin: 0 0 3px;
+}
+
+.network_userInfo p {
+  font-size: 13px;
+  color: gray;
+  margin: 0;
+}
+
+.network_actions {
+  display: flex;
+  gap: 10px;
+}
+
+.network_ignoreBtn {
+  background: white;
+  border: 1px solid gray;
+  color: gray;
+  padding: 7px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.network_acceptBtn {
+  background: #0077b5;
+  border: none;
+  color: white;
+  padding: 7px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.network_connected {
+  color: green;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.network_cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.network_cardHeader h3 {
+  margin: 0;
+  border: none;
+  padding: 0;
+}
+
+.network_showAll {
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.network_showAll:hover {
+  color: #0077b5;
+  text-decoration: underline;
+}
+
+.network_grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.network_gridCard {
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 15px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  text-align: center;
+  background: white;
+}
+
+.network_dismissBtn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #e0e0e0;
+  border: none;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  font-size: 11px;
+  cursor: pointer;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.network_dismissBtn:hover {
+  background: #ccc;
+}
+
+.network_gridAvatarWrap {
+  margin: 10px 0 8px;
+}
+
+.network_gridAvatar {
+  width: 72px !important;
+  height: 72px !important;
+  font-size: 28px !important;
+  background-color: #0077b5 !important;
+}
+
+.network_gridInfo {
+  flex: 1;
+  width: 100%;
+}
+
+.network_gridInfo h4 {
+  font-size: 14px;
+  margin: 0 0 4px;
+  font-weight: 600;
+}
+
+.network_gridInfo p {
+  font-size: 12px;
+  color: gray;
+  margin: 0 0 10px;
+}
+
+.network_gridConnectBtn {
+  margin-top: auto;
+  background: white;
+  border: 1px solid #0077b5;
+  color: #0077b5;
+  padding: 6px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  width: 100%;
+}
+
+.network_gridConnectBtn:hover {
+  background: #e8f4fd;
+}
+
+.network_gridPendingBtn {
+  margin-top: auto;
+  background: #f0f0f0;
+  border: none;
+  color: gray;
+  padding: 6px 20px;
+  border-radius: 20px;
+  font-size: 13px;
+  width: 100%;
+}
+
+
+@media (max-width: 768px) {
+  .network {
+    flex-direction: column;
+  }
+
+  .network_left {
+    width: 100%;
+  }
+
+  .network_grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

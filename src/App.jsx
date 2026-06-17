@@ -8,6 +8,10 @@ import { login, logout, selectUser } from "./features/userSlice";
 import Login from "./Login";
 import Widgets from "./Widgets";
 import Profile from "./Profile";
+import Network from "./Network"
+import Jobs from "./Jobs"
+import  Message  from "./Message";
+import Notification from "./Notification"
 
 
 
@@ -26,11 +30,14 @@ function App() {
     }
   }, []);
 
-  // Ek jagah Header props banao
+  
   const headerProps = {
     onViewProfile: () => setCurrentPage('profile'),
     onGoHome:      () => setCurrentPage('home'),
-   
+    onNetwork:      () => setCurrentPage('network'),
+    onJobs: () => setCurrentPage('jobs'),
+    onMessaging:() => setCurrentPage('message'),
+    onNotifications:() => setCurrentPage('notification')
   };
 
  return (
@@ -43,7 +50,28 @@ function App() {
         <Header {...headerProps} />
         <Profile onBack={() => setCurrentPage('home')} />
       </>
-    ) : (
+    ) : currentPage === 'network' ? (
+      <>
+      <Header {...headerProps} />
+        <Network />
+      </>
+      ) : currentPage === 'jobs' ? (
+      <>
+      <Header {...headerProps} />
+        <Jobs />
+      </>
+       ) : currentPage === 'message' ? (
+      <>
+      <Header {...headerProps} />
+        <Message/>
+      </>
+
+       ) : currentPage === 'notification' ? (
+      <>
+      <Header {...headerProps} />
+        <Notification/>
+      </>
+    ):(
       <>
         <Header {...headerProps} />
         <div className="app__body">
