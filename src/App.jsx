@@ -11,6 +11,7 @@ import Profile from "./Profile";
 import Network from "./Network"
 import Jobs from "./Jobs"
 import  Message  from "./Message";
+import Notification from "./Notification"
 
 
 
@@ -35,8 +36,8 @@ function App() {
     onGoHome:      () => setCurrentPage('home'),
     onNetwork:      () => setCurrentPage('network'),
     onJobs: () => setCurrentPage('jobs'),
-    onMessaging:() => setCurrentPage('message')
-   
+    onMessaging:() => setCurrentPage('message'),
+    onNotifications:() => setCurrentPage('notification')
   };
 
  return (
@@ -63,6 +64,12 @@ function App() {
       <>
       <Header {...headerProps} />
         <Message/>
+      </>
+
+       ) : currentPage === 'notification' ? (
+      <>
+      <Header {...headerProps} />
+        <Notification/>
       </>
     ):(
       <>

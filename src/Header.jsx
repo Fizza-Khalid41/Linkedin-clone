@@ -10,7 +10,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useDispatch } from "react-redux";
 import { logout } from "./features/userSlice";
 
-function Header({ onViewProfile, onGoHome, onNetwork, onJobs, onMessaging , onNotification }) {
+function Header({ onViewProfile, onGoHome, onNetwork, onJobs, onMessaging , onNotifications }) {
   const dispatch = useDispatch();
 
   const logoutOfApp = () => {
@@ -39,7 +39,7 @@ function Header({ onViewProfile, onGoHome, onNetwork, onJobs, onMessaging , onNo
         <HeaderOption Icon={SupervisorAccountIcon} title="My Network" onClick={onNetwork} />
         <HeaderOption Icon={BusinessCenterIcon} title="Jobs"  onClick={onJobs}/>
         <HeaderOption Icon={ChatIcon} title="Messaging" onClick={onMessaging} />
-        <HeaderOption Icon={NotificationsIcon} title="Notifications" onClick={onNotification} />
+        <HeaderOption Icon={NotificationsIcon} title="Notifications" onClick={onNotifications} />
         <HeaderOption
           avatar={true}
           title="Me"
